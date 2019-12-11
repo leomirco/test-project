@@ -32,7 +32,10 @@ module.exports.routes = {
   * not match any of those, it is matched against static assets.             *
   *                                                                          *
   ***************************************************************************/
-'GET /' : 'HelloController.hello',
+
 '/product/:productCode/:humidity/:temperature/:co/:no2': { controller: 'ProductController', action: 'getProduct' },
-'/search/:data_rivelazione': { controller: 'ProductController', action: 'getValue' }
+'/search/:data_rivelazione': { controller: 'ProductController', action: 'getValue' },
+
+
 };
+
