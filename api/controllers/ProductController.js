@@ -25,15 +25,24 @@ module.exports = {
         }
         return res.badRequest(`product ${req.params.productCode} not found`);
     },
-    getValue: async function(req, res) {
-        console.log("Ricerca lettura")
+    getValuexData: async function(req, res) {
+        console.log("Ricerca x data_rivelazione")
         if(req.params.data_rivelazione){
             let product = await Product.find({data_rivelazione: req.params.data_rivelazione}).sort({'createdAt': -1});
             console.log(req.params.data_rivelazione);
              return res.send(product);
         }
+        return res.badRequest(`product ${req.params.data_rivelazione} not found`);
+    },
+    getValuexproductcode: async function(req, res) {
+        console.log("Ricerca x productCode")
+        if(req.params.productCode){
+            let product = await Product.find({productCode: req.params.productCode}).sort({'createdAt': -1});
+            console.log(req.params.productCode);
+             return res.send(product);
+        }
         return res.badRequest(`product ${req.params.productCode} not found`);
-    }
+    },
     
     
 };
