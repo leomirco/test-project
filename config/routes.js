@@ -36,7 +36,7 @@ module.exports.routes = {
 '/product/:productCode/:humidity/:temperature/:co/:no2': { controller: 'ProductController', action: 'getProduct' },
 '/search/data/:data_rivelazione': { controller: 'ProductController', action: 'getValuexData' },
 '/search/productcode/:productCode': { controller: 'ProductController', action: 'getValuexproductcode' },
-'/dfweb/': { controller: 'ProductController', action: 'getCurrentValue' },
+'/dfweb/': { controller: 'ProductController', action: 'getIntentReply' },
 
 };
 

@@ -5,6 +5,9 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const dialogflow = require('dialogflow');
+const { WebhookClient } = require('dialogflow-fulfillment');
+
 /*global Product*/
 module.exports = {
     getProduct: async function(req, res) {
@@ -56,7 +59,22 @@ module.exports = {
         }
         return res.badRequest(`product ${req.params.data_rivelazione} not found`);
     },
-    
+     getIntentReply: async function(req, res) {
+        console.log("prove")
+        console.log("Webhook. Request body: " , req);
+        const agent = new WebhookClient({ request: req, response: res });
+        const df_intent = agent.intent.toLowerCase()
+        console.log('Webhook. agent.intent: ', df_intent);
+        console.log('Webhook. agent.session: ', agent.session);
+
+        if (df_intent === "temperatura casa") {
+            console.log('intent: ', agent.intent);
+            const session = agent.session
+            var df_res = {}
+            df_res['fulfillmentText'] = "la temperatura è di 33 gradi"
+            res.status(200).send(JSON.stringify(df_res));
+        }
+     }
     
 };
 
