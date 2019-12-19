@@ -43,6 +43,19 @@ module.exports = {
         }
         return res.badRequest(`product ${req.params.productCode} not found`);
     },
+    getCurrentValue: async function(req, res) {
+        console.log("Temperatura corrente in casa")
+        if(req.params.data_rivelazione){
+            var day = new Date().getDate();
+            var month = new Date().getMonth();
+            var year = "2019";
+            var dataCurrent =  day+"-"+month+"-"+year;
+            let product = await Product.find({data_rivelazione: dataCurrent}).sort({'createdAt': -1});
+            console.log("data corrente: "+dataCurrent);
+             return res.send(product);
+        }
+        return res.badRequest(`product ${req.params.data_rivelazione} not found`);
+    },
     
     
 };
