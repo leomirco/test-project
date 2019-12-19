@@ -45,7 +45,7 @@ module.exports = {
     },
     getCurrentValue: async function(req, res) {
         console.log("Temperatura corrente in casa")
-        if(req.params.data_rivelazione){
+        if(true){
             var day = new Date().getDate();
             var month = new Date().getMonth();
             var year = "2019";
