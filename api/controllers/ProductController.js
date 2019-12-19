@@ -77,7 +77,7 @@ module.exports = {
             var dataCurrent =  day+"-"+month+"-"+year;
             let product = await Product.find({data_rivelazione: dataCurrent}).sort({'createdAt': -1});
             console.log("prodotto: ",product)
-            var temp = product.temperature
+            var temp = product[0].temperature
             
             console.log('intent: ', agent.intent);
             const session = agent.session
