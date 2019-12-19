@@ -59,26 +59,21 @@ module.exports = {
         }
         return res.badRequest(`product ${req.params.data_rivelazione} not found`);
     },
-     getIntentReply: async function(req, res) {
-        console.log("prove")
-        console.log("Webhook. Request body: " , req);
+     getTemperatureIntentReply: async function(req, res) {
+        console.log("Webhook. Request body: ",req);
         const agent = new WebhookClient({ request: req, response: res });
         const df_intent = agent.intent.toLowerCase()
         console.log('Webhook. agent.intent: ', df_intent);
         console.log('Webhook. agent.session: ', agent.session);
-
         if (df_intent === "temperatura casa") {
-            // eseguo query
-            // var temp = json.temperature
-            
+            // eseguo query di ricerca dell'ultima temperatura rilevata
             var day = new Date().getDate();
             var month = new Date().getMonth();
-            var year = "2019";
+            var year = new Date().getYear();
             var dataCurrent =  day+"-"+month+"-"+year;
             let product = await Product.find({data_rivelazione: dataCurrent}).sort({'createdAt': -1});
             console.log("prodotto: ",product)
             var temp = product[0].temperature
-            
             console.log('intent: ', agent.intent);
             const session = agent.session
             var df_res = {}
