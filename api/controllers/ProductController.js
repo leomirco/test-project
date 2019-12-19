@@ -59,7 +59,7 @@ module.exports = {
         }
         return res.badRequest(`product ${req.params.data_rivelazione} not found`);
     },
-     getValueIntentReply: async function(req, res) {
+     getValuexData: async function(req, res) {
         console.log("Webhook. Request body: ",req);
         const agent = new WebhookClient({ request: req, response: res });
         const df_intent = agent.intent.toLowerCase()
@@ -69,7 +69,7 @@ module.exports = {
             // eseguo query di ricerca dell'ultima temperatura rilevata
             var day = new Date().getDate();
             var month = new Date().getMonth();
-            var year = new Date().getYear();
+            var year = "2019";
             var dataCurrent =  day+"-"+month+"-"+year;
             let product = await Product.find({data_rivelazione: dataCurrent}).sort({'createdAt': -1});
             console.log("prodotto: ",product)
