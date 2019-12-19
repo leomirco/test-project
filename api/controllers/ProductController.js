@@ -59,7 +59,7 @@ module.exports = {
         }
         return res.badRequest(`product ${req.params.data_rivelazione} not found`);
     },
-     getTemperatureIntentReply: async function(req, res) {
+     getValueIntentReply: async function(req, res) {
         console.log("Webhook. Request body: ",req);
         const agent = new WebhookClient({ request: req, response: res });
         const df_intent = agent.intent.toLowerCase()
