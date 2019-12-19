@@ -68,10 +68,20 @@ module.exports = {
         console.log('Webhook. agent.session: ', agent.session);
 
         if (df_intent === "temperatura casa") {
+            // eseguo query
+            // var temp = json.temperature
+            
+            var day = new Date().getDate();
+            var month = new Date().getMonth();
+            var year = "2019";
+            var dataCurrent =  day+"-"+month+"-"+year;
+            let product = await Product.find({data_rivelazione: dataCurrent}).sort({'createdAt': -1});
+            var temp = product.temperature
+            
             console.log('intent: ', agent.intent);
             const session = agent.session
             var df_res = {}
-            df_res['fulfillmentText'] = "la temperatura è di 33 gradi"
+            df_res['fulfillmentText'] = "la temperatura è di " + temp + " gradi"
             res.status(200).send(JSON.stringify(df_res));
         }
      }
