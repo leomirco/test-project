@@ -70,7 +70,7 @@ module.exports = {
         if (df_intent === "temperatura casa") {
             // eseguo query di ricerca dell'ultima temperatura rilevata
             var day = new Date().getDate();
-            var month = new Date().getMonth();
+            var month = new Date().getMonth()+1;
             var year = "2019";
             var dataCurrent =  day+"-"+month+"-"+year;
             console.log("Data corrente: ", dataCurrent);
