@@ -60,11 +60,13 @@ module.exports = {
         return res.badRequest(`product ${req.params.data_rivelazione} not found`);
     },
      getIntentReply: async function(req, res) {
-        console.log("Webhook. Request body: " , req);
-        const agent = new WebhookClient({ request: req, response: res });
-        const df_intent = agent.intent.toLowerCase()
-        console.log('Webhook. agent.intent: ', df_intent);
-        console.log('Webhook. agent.session: ', agent.session);
+        console.log("entrato");
+        console.log("Webhook. Request body: "+req);
+        console.log("Webhook. Request body: "+res);
+        const agent = new WebhookClient({request: req, response: res});
+        const df_intent = agent.intent.toLowerCase();
+        console.log('Webhook. agent.intent: '+df_intent);
+        console.log('Webhook. agent.session: '+agent.session);
         if (df_intent === "temperatura casa") {
             // eseguo query di ricerca dell'ultima temperatura rilevata
             var day = new Date().getDate();
@@ -72,11 +74,12 @@ module.exports = {
             var year = "2019";
             var dataCurrent =  day+"-"+month+"-"+year;
             let product = await Product.find({data_rivelazione: dataCurrent}).sort({'createdAt': -1});
-            console.log("prodotto: ",product)
-            var temp = product[0].temperature
-            console.log('intent: ' , agent.intent);
-            const session = agent.session
-            var df_res = {}
+            console.log("prodotto: ", product);
+            var temp = product[0].temperature;
+            console.log('temperatura rilevata: '+product[0].temperature);
+            console.log('intent: '+agent.intent);
+            const session = agent.session;
+            var df_res = {};
             df_res['fulfillmentText'] = "la temperatura è di " + temp + " gradi"
             res.status(200).send(JSON.stringify(df_res));
         }
