@@ -14,7 +14,7 @@ module.exports = {
         console.log("Lettura inserita")
         if(req.params.productCode){
             var day = new Date().getDate();
-            var month = new Date().getMonth();
+            var month = new Date().getMonth()+1;
             var year = "2019";
             var hour = new Date().getHours();
             var minute = new Date().getMinutes();;
