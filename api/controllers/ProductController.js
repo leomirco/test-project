@@ -75,12 +75,10 @@ module.exports = {
             var year = "2019";
             var dataCurrent =  day+"-"+month+"-"+year;
             console.log("Data corrente: ", dataCurrent);
-            let product = await Product.find({data_rivelazione: dataCurrent}).sort({'createdAt': -1});
+            //let product = await Product.find({data_rivelazione: dataCurrent}).sort({'createdAt': -1});
+            let product = await Product.find({}).sort({'createdAt': -1}).limit(1); 
             console.log("prodotto: ", product);
             var temp = product[0].temperature;
-            if (temp == null) {
-               let product = await Product.find({}).sort({'createdAt': -1}).limit(1); 
-            }
             console.log('temperatura rilevata: '+product[0].temperature);
             console.log('intent: '+agent.intent);
             const session = agent.session;
