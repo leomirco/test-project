@@ -83,7 +83,7 @@ module.exports = {
             console.log('intent: '+agent.intent);
             const session = agent.session;
             var df_res = {};
-            df_res['fulfillmentText'] = "la temperatura è di " + temp + " gradi - < "+product[0].data_rivelazione+" / "+ product[0].ora_rivelazione+" >"
+            df_res['fulfillmentText'] = "temperatura rilevata  " + temp + " gradi - < "+product[0].data_rivelazione+" / "+ product[0].ora_rivelazione+" >"
             res.status(200).send(JSON.stringify(df_res));
         }
         if (df_intent === "umidita casa") {
@@ -102,10 +102,14 @@ module.exports = {
             console.log('intent: '+agent.intent);
             const session = agent.session;
             var df_res = {};
-            df_res['fulfillmentText'] = "l'umidità è di " + hum + " % - < "+product[0].data_rivelazione+" / "+ product[0].ora_rivelazione+" >"
+            df_res['fulfillmentText'] = "umidità rilevata " + hum + " % - < "+product[0].data_rivelazione+" / "+ product[0].ora_rivelazione+" >"
             res.status(200).send(JSON.stringify(df_res));
         }
+       
+        
      }
+     
+
     
 };
 
