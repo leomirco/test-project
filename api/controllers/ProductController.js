@@ -8,8 +8,26 @@
 const dialogflow = require('dialogflow');
 const { WebhookClient } = require('dialogflow-fulfillment');
 
+// FUNZIONI
+function getValue(a){console.log(a)
+    return 3
+}
+ 
+function getMedia(numero_letture, product) {
+          var somma= 0;
+          var media;
+          for(var i = 0; i < numero_letture;i++){
+                somma = somma + product[i].temperature;
+            }
+            media = somma/numero_letture;
+            console.log("numero letture: ", numero_letture);
+            console.log("LUNGHEZZA,SOMMA,MEDIA:"+product.length+" "+somma+" "+media);
+            return media;  
+     }
+
 /*global Product*/
 module.exports = {
+    
     getProduct: async function(req, res) {
         console.log("Lettura inserita")
         if(req.params.productCode){
@@ -107,40 +125,29 @@ module.exports = {
         }
          if (df_intent === "temperatura media giornaliera") {
             console.log("TEMPERATURA MEDIA GIORNALIERA");
-            var somma= 0;
-            var media;
             var numero_letture = await Product.count({data_rivelazione:'3-1-2019'});
             let product = await Product.find({where:{data_rivelazione:'3-1-2019'}}).sort('createdAt DESC');
-            for(var i = 0; i < product.length;i++){
-                somma = somma + product[i].temperature;
-            }
-            media = somma/numero_letture;
-            console.log("numero letture: ", numero_letture);
-            console.log("LUNGHEZZA,SOMMA,MEDIA:"+product.length+" "+somma+" "+media);
-           
+            var media = getMedia(numero_letture,product);
+            console.log('MEDIA '+getMedia(numero_letture,product));
             console.log('intent: '+agent.intent);
             const session = agent.session;
             var df_res = {};
-            df_res['fulfillmentText'] = "temperatura media giornaliera " + media + " % - < "+product[0].data_rivelazione+" /  >"
+            df_res['fulfillmentText'] = "temperatura media giornaliera " + media + " - < "+product[0].data_rivelazione+" /  >"
             res.status(200).send(JSON.stringify(df_res));
         }
     
      },
+    
       getAvg: async function(req, res) {
-          var somma= 0;
-          var media;
-            console.log("TEMPERATURA GIORNALIERE");
+         console.log("TEMPERATURA MEDIA GIORNALIERA");
             var numero_letture = await Product.count({data_rivelazione:'3-1-2019'});
             let product = await Product.find({where:{data_rivelazione:'3-1-2019'}}).sort('createdAt DESC');
-            for(var i = 0; i < product.length;i++){
-                somma = somma + product[i].temperature;
-            }
-            media = somma/numero_letture;
-            console.log("numero letture: ", numero_letture);
-            console.log("LUNGHEZZA,SOMMA,MEDIA:"+product.length+" "+somma+" "+media);
-            
-           // var total = await Product.avg('temperature').where({data_rivelazione: '3-1-2019'});
-            //console.log("temperatura totale: ", total);
+            var media = getMedia(numero_letture,product);
+            console.log('MEDIA '+getMedia(numero_letture,product));
     }
+   
+     
+     
+     
 };
 
