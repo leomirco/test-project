@@ -105,17 +105,23 @@ module.exports = {
             df_res['fulfillmentText'] = "umidità rilevata " + hum + " % - < "+product[0].data_rivelazione+" / "+ product[0].ora_rivelazione+" >"
             res.status(200).send(JSON.stringify(df_res));
         }
-         if (df_intent === "temperatura giornaliera") {
-            console.log("TEMPERATURA GIORNALIERA");
-            //let product = await Product.find({data_rivelazione: dataCurrent}).sort({'createdAt': -1});
-            var total = await Product.sum('temperature');
-            console.log("temperatura totale: ", total);
-            var count = await Product.count('temperature');
-            console.log('temperature rilevate: '+Product.count('temperature'));
+         if (df_intent === "temperatura media giornaliera") {
+            console.log("TEMPERATURA MEDIA GIORNALIERA");
+            var somma= 0;
+            var media;
+            var numero_letture = await Product.count({data_rivelazione:'3-1-2019'});
+            let product = await Product.find({where:{data_rivelazione:'3-1-2019'}}).sort('createdAt DESC');
+            for(var i = 0; i < product.length;i++){
+                somma = somma + product[i].temperature;
+            }
+            media = somma/numero_letture;
+            console.log("numero letture: ", numero_letture);
+            console.log("LUNGHEZZA,SOMMA,MEDIA:"+product.length+" "+somma+" "+media);
+           
             console.log('intent: '+agent.intent);
             const session = agent.session;
             var df_res = {};
-           // df_res['fulfillmentText'] = "umidità rilevata " + hum + " % - < "+product[0].data_rivelazione+" / "+ product[0].ora_rivelazione+" >"
+            df_res['fulfillmentText'] = "temperatura media giornaliera " + media + " % - < "+product[0].data_rivelazione+" /  >"
             res.status(200).send(JSON.stringify(df_res));
         }
     
@@ -133,12 +139,8 @@ module.exports = {
             console.log("numero letture: ", numero_letture);
             console.log("LUNGHEZZA,SOMMA,MEDIA:"+product.length+" "+somma+" "+media);
             
-            
            // var total = await Product.avg('temperature').where({data_rivelazione: '3-1-2019'});
             //console.log("temperatura totale: ", total);
     }
-     
-
-    
 };
 
