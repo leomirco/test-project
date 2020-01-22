@@ -33,7 +33,7 @@ module.exports = {
     type: 'string'
   },
   temperature: {
-    type: 'string'
+    type: 'number'
   },
   co: {
     type: 'string'
