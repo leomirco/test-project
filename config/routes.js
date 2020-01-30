@@ -37,7 +37,9 @@ module.exports.routes = {
 '/search/data/:data_rivelazione': { controller: 'ProductController', action: 'getValuexData' },
 '/search/productcode/:productCode': { controller: 'ProductController', action: 'getValuexproductcode' },
 '/dfweb/': { controller: 'ProductController', action: 'getIntentReply' },
-'/avg/': { controller: 'ProductController', action: 'getAvg' }
-
+'/avg/': { controller: 'ProductController', action: 'getAvg' },
+'/getarpavalue/': { controller: 'ProductController', action: 'getArpaValue' },
+'/restapi/': { controller: 'ProductController', action: 'getRestAPI' },
+'/getpm25home/': { controller: 'ProductController', action: 'getPm25Home' },
 };
 
