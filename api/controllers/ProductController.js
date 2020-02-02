@@ -158,13 +158,13 @@ module.exports = {
             console.log('REQUEST HOST '+req.hostname+' PATH/ '+req.path+' PORT/ '+req.port+' /OPTION'+options);
             console.log('RESPONSE STATUS: ' + res.statusCode+' /HEADERS: ' + JSON.stringify(res.headers));
             var data = ""
-            let object = {};
+            //let object = {};
             res.setEncoding('utf8');
             res.on('data', function (chunk) {
                 data += chunk;    
             });
             res.on('end', () => {
-                object = JSON.parse(data);
+               let object = JSON.parse(data);
                 console.log('object.id: ' + object.id);
                 console.log('object data/ora: ' + object["info.aqi"].ts);
                 console.log('object temperatura: ' + object["info.aqi"].data.temp);
