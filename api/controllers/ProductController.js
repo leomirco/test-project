@@ -182,9 +182,7 @@ module.exports = {
             res.on('error', function(e) {
                 console.error(e);
             });
-            res.status(200).send(JSON.stringify(df_res));
         }).end();
-        
         }
      },
     
