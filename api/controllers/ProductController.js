@@ -145,6 +145,7 @@ module.exports = {
         }
          if (df_intent === "valori particolato indoor") {
             console.log("PARTICOLATO INDOOR");
+             let object
             var rs = "someone";
         var options = {
             hostname: 'api.origins-china.cn',
@@ -163,7 +164,7 @@ module.exports = {
                 data += chunk;    
             });
             res.on('end', () => {
-                let object = JSON.parse(data);
+                object = JSON.parse(data);
                 console.log('object.id: ' + object.id);
                 console.log('object data/ora: ' + object["info.aqi"].ts);
                 console.log('object temperatura: ' + object["info.aqi"].data.temp);
@@ -173,14 +174,14 @@ module.exports = {
                 console.log('object pm25: ' + object["info.aqi"].data.pm25);
                 console.log('intent: '+agent.intent);
                 const session = agent.session;
-                var df_res = {};
-                df_res['fulfillmentText'] = "Valori particolato indoor PM2.5: " + object["info.aqi"].data.pm25 + " PM10: "+object["info.aqi"].data.pm10+" /  >"
-                res.status(200).send(JSON.stringify(df_res));
             });
             res.on('error', function(e) {
                 console.error(e);
             });
         }).end();
+         var df_res = {};
+         df_res['fulfillmentText'] = "Valori particolato indoor PM2.5: " + object["info.aqi"].data.pm25 + " PM10: "+object["info.aqi"].data.pm10+" /  >"
+         res.status(200).send(JSON.stringify(df_res));
         }
      },
     
