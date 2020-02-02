@@ -145,7 +145,6 @@ module.exports = {
         }
          if (df_intent === "valori particolato indoor") {
             console.log("PARTICOLATO INDOOR");
-             let object = {};
             var rs = "someone";
         var options = {
             hostname: 'api.origins-china.cn',
@@ -159,6 +158,7 @@ module.exports = {
             console.log('REQUEST HOST '+req.hostname+' PATH/ '+req.path+' PORT/ '+req.port+' /OPTION'+options);
             console.log('RESPONSE STATUS: ' + res.statusCode+' /HEADERS: ' + JSON.stringify(res.headers));
             var data = ""
+            let object = {};
             res.setEncoding('utf8');
             res.on('data', function (chunk) {
                 data += chunk;    
