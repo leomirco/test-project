@@ -145,7 +145,7 @@ module.exports = {
         }
          if (df_intent === "valori particolato indoor") {
             console.log("PARTICOLATO INDOOR");
-             let object
+             let object = {};
             var rs = "someone";
         var options = {
             hostname: 'api.origins-china.cn',
