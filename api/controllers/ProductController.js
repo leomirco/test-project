@@ -179,7 +179,7 @@ module.exports = {
                 console.error(e);
             });
              var df_res = {};
-         df_res['fulfillmentText'] = "Valori particolato indoor PM2.5: " + object["info.aqi"].data.pm25 + " PM10: "+object["info.aqi"].data.pm10+" /  >"
+         df_res['fulfillmentText'] = "Valori particolato indoor PM2.5: " + object["info.aqi"].data.pm25 + " PM10: "+object["info.aqi"].data.pm10+" /  >";
          console.log("Valori particolato indoor PM2.5: " + object["info.aqi"].data.pm25 + " PM10: "+object["info.aqi"].data.pm10+" /  >");
          res.status(200).send(JSON.stringify(df_res));
         }).end();
