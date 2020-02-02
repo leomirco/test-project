@@ -174,13 +174,13 @@ module.exports = {
                 console.log('object pm25: ' + object["info.aqi"].data.pm25);
                 console.log('intent: '+agent.intent);
                 const session = agent.session;
+                var df_res = {};
+                df_res['fulfillmentText'] = "Valori particolato indoor PM2.5: " + object["info.aqi"].data.pm25 + " PM10: "+object["info.aqi"].data.pm10+" /  >";
+                console.log("Valori particolato indoor PM2.5: " + object["info.aqi"].data.pm25 + " PM10: "+object["info.aqi"].data.pm10+" /  >");
             });
             res.on('error', function(e) {
                 console.error(e);
             });
-             var df_res = {};
-         df_res['fulfillmentText'] = "Valori particolato indoor PM2.5: " + object["info.aqi"].data.pm25 + " PM10: "+object["info.aqi"].data.pm10+" /  >";
-         console.log("Valori particolato indoor PM2.5: " + object["info.aqi"].data.pm25 + " PM10: "+object["info.aqi"].data.pm10+" /  >");
          res.status(200).send(JSON.stringify(df_res));
         }).end();
         
